@@ -1,0 +1,10 @@
+# Cerca di caricare i file da production se non sono in locale
+# da caricar dentro cartella/locale/wp-content/uploads/.htaccess
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+
+	# Inserire dominio production 
+	RewriteRule (.*) https://www.YOUR_DOMAIN.dns/wp/wp-content/uploads/$1
+</IfModule>

@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+   db:
+     image: mariadb:10.3
+     container_name: "wp-mysql"
+     volumes:
+      # - ${PWD}/data:/var/lib/mysql
+       - ${PWD}/dump:/docker-entrypoint-initdb.d
+     restart: unless-stopped
+     #ports:
+     #  - "3306:3306"
+     environment:
+       MYSQL_ROOT_PASSWORD: pass
+       MYSQL_DATABASE: wp_wordpress
+       MYSQL_USER: wp_user
+       MYSQL_PASSWORD: wp_pass
+
+   phpmyadmin:
+     depends_on:
+       - "db"
+     image: phpmyadmin/phpmyadmin:4.9
+     container_name: "php-my-admin"
+     ports: 
+        - "8081:80"
+     environment:
+       PMA_HOST: db
+       
+   wordpress:
+     depends_on:
+       - "db"
+     #build:
+     #  context: .
+     #  dockerfile: Dockerfile.website
+     image: wordpress:php7.3-apache
+     container_name: "wp-site"
+     volumes:
+       - ${PWD}/themes:/var/www/html/wp-content/themes
+       - ${PWD}/plugins:/var/www/html/wp-content/plugins
+       - ${PWD}/uploads:/var/www/html/wp-content/uploads
+     ports:
+       - "8000:80"
+     restart: unless-stopped
+     environment:
+       WP_ENV: "local"
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wp_user
+       WORDPRESS_DB_PASSWORD: wp_pass
+       WORDPRESS_DB_NAME: wp_wordpress
+       # DATABASE_URL: "mysql://root:changeme@mariadb:3306/website"
+       
+volumes:
+    # data:
+    themes:
+    plugins:
+    uploads:

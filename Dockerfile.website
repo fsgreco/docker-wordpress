@@ -1,0 +1,9 @@
+From wordpress:latest
+
+RUN apt-get update --fix-missing && apt-get install -y less unzip
+
+RUN chown -R 1000:1000 /var/www/html
+
+RUN apt-get install -y apache2-dev
+
+CMD ["apache2-foreground"]

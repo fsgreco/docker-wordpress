@@ -1,0 +1,30 @@
+# System files
+.env
+.DS_Store
+.directory
+node_modules/
+
+dump/*
+!dump/.gitkeep 
+
+themes/twenty*
+themes/index.php
+
+# CUSTOM USER CONFIG VSCODE - per evitare di formattazione automatica del codice altrui
+.vscode/settings.json
+*.code-workspace
+
+# Htaccess
+/.htaccess
+wp/wp-content/uploads/.htaccess
+
+## Uploads (only wp generated thumbnails) ##
+uploads/**/**/*-[0-9]*x[0-9]*.*
+uploads/woocommerce_uploads
+uploads/wc-logs
+
+## PLUGINS ##
+plugins/*
+# exceptions
+!plugins/*-simple-cookie-banner
+!plugins/*-simple-GTM-plugin
