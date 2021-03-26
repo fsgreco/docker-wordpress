@@ -10,7 +10,7 @@ services:
      restart: unless-stopped
      #ports:
      #  - "3306:3306"
-     environment:
+     environment: # the mysql user is 'root'
        MYSQL_ROOT_PASSWORD: pass
        MYSQL_DATABASE: wp_wordpress
        MYSQL_USER: wp_user
@@ -29,10 +29,10 @@ services:
    wordpress:
      depends_on:
        - "db"
-     #build:
-     #  context: .
-     #  dockerfile: Dockerfile.website
-     image: wordpress:php7.3-apache
+     build:
+       context: .
+       dockerfile: Dockerfile.website
+     #image: wordpress:php7.4-apache
      container_name: "wp-site"
      volumes:
        - ${PWD}/themes:/var/www/html/wp-content/themes

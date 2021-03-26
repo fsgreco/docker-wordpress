@@ -1,9 +1,6 @@
-From wordpress:latest
+From wordpress:php7.4-apache
 
-RUN apt-get update --fix-missing && apt-get install -y less unzip
-
-RUN chown -R 1000:1000 /var/www/html
-
-RUN apt-get install -y apache2-dev
+ARG user_id=1000
+RUN usermod -u $user_id www-data
 
 CMD ["apache2-foreground"]
