@@ -20,6 +20,8 @@ This is a simple boilerplate to use wordpress on a developer enviroment with doc
 
 5. Access to your wordpress at: `http://localhost:8000`
 
+:rocket: And that's it!
+
 ### Suggested workflow
 
 You can place a git submodule inside `themes` folder, in order to have a separate repository to manage your theme.
@@ -33,13 +35,15 @@ You can also use a `composer.json` to manage plugins from your theme folder. Thi
 
 Be aware that Docker Wordpress images are Debian-based, its default user is `www-data` and its user id (aka `UID`) is `33` (same for the group user id: `gid=33`). You'll see the user `www-data` from inside the container.
 
-To work with mounted volumes on your host intance (for ex `/themes`, `/plugins`, `/uploads`), at least add yourself to the same group of the the conteinarized user. So for example you need to add yourself to group `33` (in archlinux this `gid` correspond to the `http` group):
+To work with mounted volumes on your host intance (for ex `/themes`, `/plugins`, `/uploads`), at least add yourself to the same group of the the conteinarized user. So for example you need to add yourself to supplementary group `33`:
 
-	sudo usermod -aG http your-username
+	sudo usermod -aG 33 your-username
 
-after that you need to slightly change the permissions on the volume folders you want to work with:
+(in archlinux the `gid=33` correspond to the `http` group, so the command is equivalent to `sudo chmod -aG http username`)
 
-	sudo chmod -R g+r wp-content/{themes,uploads,plugins}
+After that you need to slightly change the permissions on the volume folders you want to work with:
+
+	sudo chmod -R g+w wp-content
 
 In this way your host user will be able to write files inside those folders (even on ones created by the container user), because you'll share the same group (and with the above commend you're giving write group permissions to those files). 
 
