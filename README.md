@@ -24,7 +24,8 @@ This is a simple boilerplate to use wordpress on a developer enviroment with doc
 
 You can place a git submodule inside `themes` folder, in order to have a separate repository to manage your theme.
 
-You can also use a `composer.json` to manage plugins from your theme folder. This could remove the need to use `wp-cli` to install plugins.
+You can also use a `composer.json` to manage plugins from your theme folder. This could remove the need to use `wp-cli` to install plugins. 
+
 
 [^1]: ##suggested-workflow "Suggested workflow"
 

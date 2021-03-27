@@ -1,0 +1,11 @@
+# Do not show diff with these
+package-lock.json --diff
+
+# Ignore all test and documentation with “export-ignore”.
+.gitattributes export-ignore
+#.gitignore export-ignore
+
+# Binary files
+
+*.png binary
+*.jpg binary
