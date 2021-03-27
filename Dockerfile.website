@@ -3,4 +3,7 @@ From wordpress:php7.4-apache
 ARG user_id=1000
 RUN usermod -u $user_id www-data
 
+## This could also work (if you give add your host user to the group 33)
+#RUN chmod -R g+r /var/www/html/
+
 CMD ["apache2-foreground"]
