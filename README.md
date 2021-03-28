@@ -20,7 +20,7 @@ This is a simple boilerplate to use wordpress on a developer enviroment with doc
 
 5. Access to your wordpress at: `http://localhost:8000`
 
-:rocket: And that's it!
+And that's it! :rocket: 
 
 ### Suggested workflow
 
