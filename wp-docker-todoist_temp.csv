@@ -1,0 +1,30 @@
+TYPE,CONTENT,PRIORITY,INDENT,AUTHOR,RESPONSIBLE,DATE,DATE_LANG,TIMEZONE
+meta,view_style=board,,,,,,,
+task,Clone [the repository](https://github.com/anonimoconiglio/docker-wordpress),4,1,,,,en,Europe/Rome
+,,,,,,,,
+section,If website already exist,,,,,,,
+task,Place your database inside `/dump`,4,1,,,,en,Europe/Rome
+note,"This file does not necessary be a .sql, it could also be compressed as a .sql.gz or ",,,,,,,
+,,,,,,,,
+task,Place your themes/plugins inside their respective folders,4,1,,,,en,Europe/Rome
+note,"If you already have repository with the theme you can clone it as a submodule:
+
+`git submodule add YOUR_REPO.git wp-content/themes/THEME_NAME`",,,,,,,
+,,,,,,,,
+task,Config .htaccess file on `uploads` folder,4,1,,,,en,Europe/Rome
+note,Change YOUR_DOMAIN.dns inside the .htaccess file on `wp-content/uploads` folder,,,,,,,
+,,,,,,,,
+section,Docker bootstrap,,,,,,,
+task,Run `docker-compose up -d`,4,1,,,,en,Europe/Rome
+,,,,,,,,
+section,If loaded a database dump,,,,,,,
+task,Access to phpmyadmin at `http://localhost:8081`,4,1,,,,en,Europe/Rome
+,,,,,,,,
+task,Change the `siteurl` and `home` values inside `wp_options` table to `http://localhost:8000`,4,1,,,,en,Europe/Rome
+,,,,,,,,
+section,Dealing with permissions,,,,,,,
+task,Change `wp-content` permissions,4,1,,,,en,Europe/Rome
+note,"Add group write permissions to entire folders:
+`sudo chmod -R g+w wp-content`",,,,,,,
+note,"be sure to add yourself to the `33` supplementary group. If not already a member: 
+`sudo usermod -aG 33 your-username`",,,,,,,

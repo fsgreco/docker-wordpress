@@ -22,6 +22,8 @@ This is a simple boilerplate to use wordpress on a developer enviroment with doc
 
 And that's it! :rocket: 
 
+This same steps are replicated inside the todoist template `csv` (in case you use todoist).
+
 ### Suggested workflow
 
 You can place a git submodule inside `themes` folder, in order to have a separate repository to manage your theme.
