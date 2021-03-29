@@ -65,11 +65,9 @@ If that's your choice enable `Dockerfile.website` as the image for the `wordpres
 
 ```yml
   wordpress:
-	...
     build:
       context: .
       dockerfile: Dockerfile.website
-	...
 ```
 This will set `1000` as the UID for the default `www-data` user (in this case matching the Archlinux default user id).
 
