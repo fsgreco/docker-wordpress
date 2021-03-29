@@ -1,11 +1,37 @@
 # Do not show diff with these
-package-lock.json --diff
+*.lock            text -diff
+package-lock.json text -diff
 
 # Ignore all test and documentation with “export-ignore”.
 .gitattributes export-ignore
-#.gitignore export-ignore
+.gitkeep export-ignore
+.gitignore export-ignore
 
-# Binary files
+# Source code
+*.bash            text eol=lf
+*.htm             text diff=html
+*.html            text diff=html
+*.php             text diff=php
+*.scss            text diff=css
+*.sh              text eol=lf
+*.xhtml           text diff=html
+
+## Binaries
 
 *.png binary
 *.jpg binary
+
+# Archives
+*.7z              binary
+*.gz              binary
+*.jar             binary
+*.rar             binary
+*.tar             binary
+*.zip             binary
+
+# Fonts
+*.ttf             binary
+*.eot             binary
+*.otf             binary
+*.woff            binary
+*.woff2           binary
