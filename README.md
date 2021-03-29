@@ -8,7 +8,7 @@ This is a simple boilerplate to use wordpress on a developer enviroment with doc
 
 2. If you already have a website on development/production: 
 
-	- Place your database dump inside `/dump` folder
+	- Place your database dump inside `/dump` folder (.sql or .gz)
 	- Place your themes/plugins inside their respective folders[^1]
 	- Change `YOUR_DOMAIN.dns` inside the `.htaccess` file on `/uploads` folder
 
