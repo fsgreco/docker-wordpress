@@ -2,6 +2,9 @@
 
 This is a simple boilerplate to use wordpress on a developer enviroment with docker, orchestrating everything with docker-compose. 
 
+![carbon](https://user-images.githubusercontent.com/22715417/112973115-41f6bd80-9151-11eb-8033-365c9803bcf6.png)
+
+
 ## How to use it:
 
 1. Clone this repository
