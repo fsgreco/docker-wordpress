@@ -75,7 +75,7 @@ If that's your choice enable `Dockerfile.website` as the image for the `wordpres
 This will set `1000` as the UID for the default `www-data` user (in this case matching the Archlinux default user id).
 
 ### Using wp-cli
-If you need wp-cli you decomment the configuration inside docker-compose file.
+If you need wp-cli remove comments inside docker-compose file.
 Then choose your user according to the wordpress container config:
 - `user: xfs` # if you're using default wordpress images | this user will match 33:33 (uid:gid)
 - `user: "1000:33"` # if you use Dockerfile.website | matches www-data uid=1000
