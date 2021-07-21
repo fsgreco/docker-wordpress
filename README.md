@@ -11,17 +11,14 @@ This is a simple boilerplate to use wordpress on a developer enviroment with doc
 
 2. If you already have a website on development/production: 
 
-	- Place your database dump inside `/dump` folder (.sql or .gz)
+	- Place your database dump inside `/dump/database.sql.gz` folder (.sql or .sql.gz)
+	- Give executive permissions to the update db script: `chmod +x dump/update_db_siteurl_home.sh`
 	- Place your themes/plugins inside their respective folders[^1]
 	- Change `YOUR_DOMAIN.dns` inside the `.htaccess` file on `/uploads` folder
 
 3. Run `docker-compose up -d`
 
-4. If you load your database dump
-	- Access to phpmyadmin at `http://localhost:8081` url
-	- Then change the `siteurl` and `home` values inside `wp_options` table to `http://localhost:8000`
-
-5. Access to your wordpress at: `http://localhost:8000`
+4. Access to your wordpress at: `http://localhost:8000`
 
 And that's it! :rocket: 
 
