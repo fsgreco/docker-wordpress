@@ -30,10 +30,10 @@ services:
       - "db"
     links:
     - db:mysql
-    image: wordpress:php7.4-apache
-#    build:
-#      context: .
-#      dockerfile: Dockerfile.website
+    image: ac/wordpress
+    build:
+      context: .
+      dockerfile: Dockerfile.website
     volumes:
       - wordpress:/var/www/html
       - ${PWD}/wp-content/themes:/var/www/html/wp-content/themes
