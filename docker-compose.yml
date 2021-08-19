@@ -30,7 +30,7 @@ services:
       - "db"
     links:
     - db:mysql
-    image: ac/wordpress
+    image: fsg/wordpress
     build:
       context: .
       dockerfile: Dockerfile.website
@@ -65,4 +65,4 @@ services:
 volumes:
     database:
     wordpress:
-      name: "wp_layer"
+    #  name: "wp_layer"
