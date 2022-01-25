@@ -1,0 +1,4 @@
+services:
+  wordpress:
+    volumes:
+      - $HOME/path/to/my/wordpress/wp-content/maintenance.php:/var/www/html/wp-content/maintenance.php

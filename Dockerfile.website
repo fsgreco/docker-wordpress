@@ -4,8 +4,8 @@ FROM wordpress:php7.4-apache
 ARG user_id=1000
 RUN usermod -u $user_id www-data
 RUN groupmod -g $user_id www-data
-# Change permissions on the whole project folder 
 
+# Change permissions on the whole project folder 
 RUN chmod -R g+r /var/www/html/
 
 USER www-data

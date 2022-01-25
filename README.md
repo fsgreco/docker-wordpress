@@ -32,6 +32,26 @@ You can place a git submodule inside `themes` folder, in order to have a separat
 You can also use a `composer.json` to manage plugins from your theme folder. This could remove the need to use `wp-cli` to install plugins. 
 
 
+**Another handy idea**:
+Sometimes, specially if you have an old WordPress environment installed (with a git project you have already set up), trying to dockerize everything could be painful. 
+
+If you need to try your theme on the fly with docker (maybe try different versions of docker with it) you could set a custom directory for `themes` / `plugins` / `uploads` folder.
+
+So instead of using this repository default directories (like `/wp-content/themes/`) you tell docker to use another directory on your local machine (the one from your project), outside this repository. 
+
+Ex: `$HOME/web/my-old-wp-project/wp-content/themes`.
+
+To achieve this simply create a `.env` file and use the same variables you find inside `.env.example`:
+
+```
+THEMES_DIR=$HOME/web/your_old_wordpress_project/wp-content/themes
+PLUGINS_FOLDER=
+UPLOADS_DIR=
+```
+
+In addition, if you have new paths to match or some complex config to apply, enable the `docker-compose` override function: simply set your override paths inside the file `docker-compose.override.example.yml` and rename the file without "example" in the name. By doing so the next time you run `docker-compose up` the program will take the contents of `docker-compose.override.yml` and apply them on top of your normal docker-compose file.
+
+
 [^1]: ##suggested-workflow "Suggested workflow"
 
 ## Dealing with permissions

@@ -28,17 +28,17 @@ services:
     container_name: "wp-site"
     depends_on:
       - "db"
-    links:
-    - db:mysql
+    args:
+      user_id: $(id -u)
     image: fsg/wordpress
     build:
       context: .
       dockerfile: Dockerfile.website
     volumes:
       - wordpress:/var/www/html
-      - ${PWD}/wp-content/themes:/var/www/html/wp-content/themes
-      - ${PWD}/wp-content/plugins:/var/www/html/wp-content/plugins
-      - ${PWD}/wp-content/uploads:/var/www/html/wp-content/uploads
+      - ${THEMES_DIR:-./wp-content/themes}:/var/www/html/wp-content/themes
+      - ${PLUGINS_DIR:-./wp-content/plugins}:/var/www/html/wp-content/plugins
+      - ${UPLOADS_DIR:-./wp-content/uploads}:/var/www/html/wp-content/uploads
     ports:
       - "8000:80"
     restart: unless-stopped
