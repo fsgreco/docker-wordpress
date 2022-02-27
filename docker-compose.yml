@@ -26,7 +26,7 @@ services:
       context: .
       dockerfile: Dockerfile.website
       args:
-        user_id: $UID
+        user_id: ${UID:-1000}
     volumes:
       - wordpress:/var/www/html
       - ${THEMES_DIR:-./wp-content/themes}:/var/www/html/wp-content/themes
