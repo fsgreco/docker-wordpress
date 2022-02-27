@@ -26,3 +26,5 @@ dump/*
 # exceptions
 !*/plugins/*-simple-cookie-banner
 !*/plugins/*-simple-GTM-plugin
+
+docker-compose.override.yml
