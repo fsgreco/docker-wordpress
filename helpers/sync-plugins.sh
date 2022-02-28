@@ -4,7 +4,7 @@
 # This script launches an instance of wp-cli via docker, it then executes a set of instructions
 # The instructions for wp-cli are already setted thanks to `generate-plugins-script.js`
 # For more context and information please consult the documentation of the entire project:
-# docker-wordpress - https://github.com/fsgreco/docker-wordpress
+# docker-wordpress - https://github.com/fsgreco/docker-wordpress#sync-plugins
 
 docker run -it --rm \
     --volumes-from ${1:-'wp-site'} \

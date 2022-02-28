@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 
 /**
  * MIT © Santiago Greco - fsgreco@hey.com
@@ -9,7 +9,7 @@
  * The script generated consist on a set of instructions to install everything using wp-cli.
  * This second script can be modified or adapted.
  * For more context and information please consult the documentation of the entire project: 
- * `docker-wordpress` at https://github.com/fsgreco/docker-wordpress
+ * `docker-wordpress` at https://github.com/fsgreco/docker-wordpress#sync-plugins-matching-production-environment
  */
 
 /* Native requirements (there's no need to install anything via npm) */
@@ -41,7 +41,7 @@ try {
 
 } catch (err) {
 	console.log('ERROR READING ENV VARIABLES')
-  console.error(err)
+  throw err
 }
 
 let headers = {
@@ -73,7 +73,7 @@ const request = https.request({ hostname, path:'/wp-json/wp/v2/plugins', port: 4
 		const script = '#!/usr/bin/env bash \nsleep 5; \n\n' + commands
 
 		fs.writeFileSync('install-plugins.sh', script)
-		fs.chmodSync('install-plugins.sh', 0o771 )
+		fs.chmodSync('install-plugins.sh', 0o775 )
 
 	});
 
