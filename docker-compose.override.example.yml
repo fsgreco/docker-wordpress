@@ -15,7 +15,8 @@ services:
   #     wordpress:
   #       condition: service_healthy
   #   volumes_from: [ "wordpress" ]
-  #   user: "1000:1000" 
+  #   #user: xfs if you use default wordpress images | this user will match 33:33 (uid:gid)
+  #   user: "1000:33" 
   #   environment:
   #     WORDPRESS_DB_HOST: db:3306
   #     WORDPRESS_DB_USER: wp_user
