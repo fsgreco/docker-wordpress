@@ -1,0 +1,32 @@
+{
+	"folders": [
+		// { "name": "THEME", "path": "wp-content/themes/THEME_NAME" },
+		{
+			"name": "UPLOADS",
+			"path": "wp-content/uploads"
+		},
+		{
+			"name": "PLUGINS",
+			"path": "wp-content/plugins"
+		},
+		{
+			"name": "DOCKER-ENV",
+			"path": "."
+		},
+	],
+	"settings": 
+	{
+		"workbench.editor.labelFormat": "medium",
+		"editor.formatOnSave": false,
+		// TERMINAL CUSTOM WORKING DIRECTORY
+		// "terminal.integrated.cwd": "${workspaceFolder:THEME}",
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-azuretools.vscode-docker",
+			"naumovs.color-highlight",
+			"fayras.simple-new-file",
+			"sleistner.vscode-fileutils"
+		]
+	}
+}
