@@ -29,21 +29,20 @@ This same steps are listed inside the todoist template `csv` (in case you use to
 
 You can place a git submodule inside `themes` folder, in order to have a separate repository to manage your theme.
 
-You can also use a `composer.json` to manage plugins from your theme folder. This could remove the need to use `wp-cli` to install plugins. 
-
+You can also use a `composer.json` to manage plugins from your theme folder. This could remove the need to use `wp-cli` to install plugins.  
 
 **Another handy idea**:
-Sometimes, specially if you have an old WordPress environment installed (with a git project you have already set up), trying to dockerize everything could be painful. 
+Sometimes, specially if you have an old WordPress environment installed (with a git project you have already set up), trying to dockerize everything could be painful.  
 
 If you need to try your theme on the fly with docker (maybe try different versions of docker with it) you could set a custom directory for `themes` / `plugins` / `uploads` folder.
 
-So instead of using this repository default directories (like `/wp-content/themes/`) you tell docker to use another directory on your local machine (the one from your project), outside this repository. 
+So instead of using this repository default directories (like `/wp-content/themes/`) you tell docker to use another directory on your local machine (the one from your project), outside this repository.  
 
 Ex: `$HOME/web/my-old-wp-project/wp-content/themes`.
 
 To achieve this simply create a `.env` file and use the same variables you find inside `.env.example`:
 
-```
+```env
 THEMES_DIR=$HOME/web/your_old_wordpress_project/wp-content/themes
 PLUGINS_FOLDER=
 UPLOADS_DIR=
@@ -55,43 +54,46 @@ In addition, if you have new paths to match or some complex config to apply, ena
 
 I have developed a handy system to match the same plugins that I have on the production environment in localhost environment (this is specially useful since this system syncs the exact plugin version number that the website is actually using).
 
-##### Set enviroment variables:
+This command should be ideally launched once the wordpress container is already up. Since plugins will be synched inside that container (unless you run the sync with `test` argument - this will be explained ahead).
+
+##### Set enviroment variables
+
 To achive this you'll only need to set `.env` variables that you found inside `.env.example` file. They are:  
 
-```
+```env
 HOSTNAME=your-production-hostname.com
 USERNAME=
 APP_PASSWORD=
 ```
-
 Notice: `HOSTNAME` requires only the hostname without the protocol ('https://').  
 In order to obtain the `APP_PASSWORD` value, log in with your username on production, go to _Edit User_ page and create an _application password_ (this is a [new system for making authenticated requests to various WordPress APIs][app-pass-info] - consult the link for more information). You can add this password to the `.env` variable **with or without the spaces**, it doesn't matter.
 
 Once you have set your environment variables you're ready to go!
 
-##### Sync plugins:
+##### Sync plugins
 
-1. Go to `helpers/` directory: `cd helpers`
-2. Run the script `./generate-plugins-script.js`  
+1. Simply run `helpers/sync-plugins.sh` (from the root of the repository)
 
-- **there's no need to install anything via npm** it's vanilla nodejs script working as a binary! ;)  
+- **The 'jq' package is needed**  
 
-3. Once the script finished take a look at the new file you will find inside `helpers/` directory, it's called `install-plugins.sh`.
-
-- This are the instructions to install and activate the same plugins (with same version) on your local environment. Take a look at it, and decide which plugins install or not. You can eventually put this file inside your theme and add it to your source version control system - **by doing this way you can stop to sync all the plugins everytime** ;)
-
-4. If you already launched your environment with docker compose, now it's time to sync the plugins in the wordpress container. In order to do so launch `./sync-plugins.sh` - And that's it 🚀  
+This script will run an instance of `wp-cli` inside the docker container, from there it will try to install and activate the same plugins you have in production (matching also their version). If the plugin is not found it will simply tell you and skip that single plugin, continuing installing the ones it found.
 
 ##### If you are curious on how this works under the hood:
 
-The first script `generate-plugins-script.js` will fetch and retrieve a list of active plugins in production (thanks to the WP REST API), then it will generate a new script (this time a bash script `install-plugins.sh`) that will appear inside `helpers/`. 
+First of all, if you want to supervise which plugins will be installed, then run the script with `test` argument:
+
+```bash
+helpers/sync-plugins.sh test
+```
+It will avoid to launch the wp-cli container, but will provide the commands that container should launch, in order to be modified by you. Take a look at the new file you will find inside `helpers/` directory, it's called `install-plugins.sh`.
+
+This are the instructions to install and activate the same plugins (with same version) on your local environment. Here you can decide which plugins install or not. (You can eventually put this file inside your theme and add it to your source version control system; **by doing this way you can stop to sync all the plugins everytime** ;)
+
+Under the hood `sync-plugins.sh` will fetch and retrieve a list of active plugins in production (thanks to the WP REST API), then it will generate a new script (`install-plugins.sh`) that will appear inside `helpers/`. 
 
 This second script is only a set of instructions for `wp-cli` to install this list of plugins (with exact version that you have on production). 
 
-Once you approve your `install-plugins.sh` you can launch the sync function with `./sync-plugins.sh`. 
-
-This will run an instance of `wp-cli` inside a docker container, and inside this container it will execute the `install-plugins.sh` so it will install the specific versions of that plugins and activate them.
-
+Subsequently it will run an instance of `wp-cli` inside a docker container, and inside this container it will execute the `install-plugins.sh` so it will install the specific versions of that plugins and activate them.  
 
 [app-pass-info]: https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/ "Application Passwords on Wordpress"
 
