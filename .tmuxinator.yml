@@ -1,33 +1,16 @@
 # ./.tmuxinator.yml
+# launch this with `tmuxinator start theme=ONLY_THE_NAME_OF_THEME_FOLDER`
 
 name: YOUR_TMUX_WINDOW_NAME
 root: <%= ENV["PWD"] %>
 
-# Project hooks
-
-# Runs on project start, always
-# on_project_start: command
-
-# Run on project start, the first time
 on_project_first_start: sudo systemctl start docker
 
-# Run on project start, after the first time
-# on_project_restart: command
-
-# Run on project exit ( detaching from tmux session )
-# on_project_exit: command
-
-# Run on project stop
 on_project_stop: docker-compose down
 
-startup_window: editor
-startup_pane: 1
+startup_window: docker
 
 windows:
-  - editor:
-      layout: 5564,156x45,0,0[156x33,0,0{54x33,0,0,0,101x33,55,0,3},156x11,0,34,1]
-      panes:
-        - 1: ["systemctl status docker", "q", "lst"]
-        - 2: [ "cd wp-content/themes/YOUR_THEME_NAME", lsta, "npm run watch" ]
-        - 3: [ docker-compose up -d ]
-  #- server: echo "ciao"
+  - git: git fetch --all
+  - docker: ["systemctl status docker", "q", "docker-compose up -d"]
+  - theme: [cd wp-content/themes/<%= @settings["theme"] %>, lsta ]
