@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # MIT © Santiago Greco - fsgreco@hey.com
-# This script aim to install the same plugins you have on production on your local wp container
-# It do so by fetching (or building) a list of instructions to install those plugins.
-# When it has the instructions it launches an instance of wp-cli via docker, where it executes them.
+# This script aims to install the same active plugins on production in your local wp container
+# It do so by fetching the list of plugins to be installed and generating the instructions to do so.
+# Once it has the instructions it launches an instance of `wp-cli` via docker, where it applies them.
 #
 # The instructions for wp-cli will be already setted thanks to `generate-plugins-script.sh`
 # For more context and information please consult the documentation of the entire project:
