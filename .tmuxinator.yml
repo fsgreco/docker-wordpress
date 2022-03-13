@@ -11,6 +11,6 @@ on_project_stop: docker-compose down
 startup_window: docker
 
 windows:
-  - git: git fetch --all
+  - git: [cd wp-content/themes/<%= @settings["theme"] %>, git fetch --all ]
   - docker: ["systemctl status docker", "q", "docker-compose up -d"]
   - theme: [cd wp-content/themes/<%= @settings["theme"] %>, lsta ]
