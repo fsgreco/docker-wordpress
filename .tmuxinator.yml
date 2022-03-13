@@ -1,5 +1,5 @@
 # ./.tmuxinator.yml
-# launch this with `tmuxinator start theme=ONLY_THE_NAME_OF_THEME_FOLDER`
+# launch this with `tmuxinator start -p .tmuxinator.yml theme=ONLY_THE_NAME_OF_THEME_FOLDER`
 
 name: YOUR_TMUX_WINDOW_NAME
 root: <%= ENV["PWD"] %>
