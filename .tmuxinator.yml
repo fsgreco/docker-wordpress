@@ -1,7 +1,7 @@
 # ./.tmuxinator.yml
-# launch this with `tmuxinator start -p .tmuxinator.yml theme=ONLY_THE_NAME_OF_THEME_FOLDER`
+# launch this with `tmuxinator -s theme=ONLY_THE_NAME_OF_THEME_FOLDER`
 
-name: YOUR_TMUX_WINDOW_NAME
+name: <%= @settings["theme"] %>
 root: <%= ENV["PWD"] %>
 
 on_project_first_start: sudo systemctl start docker
