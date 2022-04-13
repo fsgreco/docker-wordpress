@@ -5,7 +5,7 @@ services:
     container_name: "wp-mysql"
     image: mariadb:10
     healthcheck:
-      test: mysqladmin ping -h 127.0.0.1
+      test: mysqladmin -uwp_user -pwp_pass ping -h 127.0.0.1
     volumes:
       - database:/var/lib/mysql
       - ${PWD}/dump:/docker-entrypoint-initdb.d
