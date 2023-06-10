@@ -7,6 +7,8 @@ services:
       retries: 5
     volumes:
       - $HOME/path/to/my/wordpress/wp-content/maintenance.php:/var/www/html/wp-content/maintenance.php
+    environment:
+      WORDPRESS_TABLE_PREFIX: wp_eccecc_
 
   # cli:
   #   container_name: wp-cli
