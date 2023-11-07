@@ -17,7 +17,7 @@ And that's it! :rocket:
 
 If you already have a website on development/production do this **before** step 2: 
 
-- Place your database dump in `/dump/database.sql.gz` (.sql or .sql.gz)
+- Place your database dump in `/dump/database.sql.gz` (.sql or .sql.gz - permissions have to be at least `644`)
 - Give executive permissions to the update db script: `chmod +x dump/update_db_siteurl_home.sh`
 - Place your themes/plugins inside their respective folders[^1]
 - Change `YOUR_DOMAIN.dns` inside the `.htaccess` file on `/uploads` folder
