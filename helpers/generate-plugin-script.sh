@@ -18,7 +18,7 @@ function generate_plugin_list() {
 
 	URL="https://${HOSTNAME}/wp-json/wp/v2/plugins"
 
-	PLUGIN_LIST=$(curl -s $URL -u ${USERNAME}:${APP_PASSWORD} )
+	PLUGIN_LIST=$(curl -s $URL -k -u ${USERNAME}:${APP_PASSWORD} )
 
 	ACTIVE_PLUGINS=$(echo $PLUGIN_LIST | jq 'map( select(.status == "active") )')
 
