@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Run an instance of wp-cli matching the wordpress container
+# E.g run `helpers/instant-wp-cli.sh [container_name] [command, e.g: plugins list --status=active]` 
 docker run -it --rm \
     --volumes-from ${1:-'wp-site'} \
     --network container:${1:-'wp-site'} \
@@ -7,5 +8,5 @@ docker run -it --rm \
     -e WORDPRESS_DB_USER=wp_user \
     -e WORDPRESS_DB_PASSWORD=wp_pass \
     -e WORDPRESS_DB_NAME=wp_wordpress \
-    --user=${2:-1000}:${3:-1000} \
-    wordpress:cli-php7.4 bash
+    --user "$(id -u)":"$(id -g)" \
+    wordpress:cli "${2:-bash}"
