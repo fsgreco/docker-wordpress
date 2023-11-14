@@ -31,5 +31,5 @@ docker run -it --rm \
     -e WORDPRESS_DB_PASSWORD=wp_pass \
     -e WORDPRESS_DB_NAME=wp_wordpress \
     --mount type=bind,source="$(pwd)"/helpers/install-plugins.sh,target=/var/www/html/install-plugins.sh \
-    --user=${2:-1000}:${3:-1000} \
-    wordpress:cli-php7.4 /var/www/html/install-plugins.sh
+    --user "$(id -u)":"$(id -g)" \
+    wordpress:cli /var/www/html/install-plugins.sh

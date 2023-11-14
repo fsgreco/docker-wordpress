@@ -29,7 +29,7 @@ This same steps are listed inside the todoist template `csv` (in case you use to
 
 You can place a git submodule inside `themes` folder, in order to have a separate repository to manage your theme.
 
-You can also use a `composer.json` to manage plugins from your theme folder. This could remove the need to use `wp-cli` to install plugins.  
+You can also use a `composer.json` to manage plugins from your theme folder. This could remove the need to use `wp-cli` to install plugins. In that case you can use the script `helpers/instant-composer.sh` once the containers are deployed.
 
 **Another handy idea**:
 Sometimes, specially if you have an old WordPress environment installed (with a git project you have already set up), trying to dockerize everything could be painful.  
@@ -63,10 +63,10 @@ To achive this you'll only need to set `.env` variables that you found inside `.
 ```env
 HOSTNAME=your-production-hostname.com
 USERNAME=
-APP_PASSWORD=
+APP_PASSWORD=withoutspacesifpossible
 ```
 Notice: `HOSTNAME` requires only the hostname without the protocol ('https://').  
-In order to obtain the `APP_PASSWORD` value, log in with your username on production, go to _Edit User_ page and create an _application password_ (this is a [new system for making authenticated requests to various WordPress APIs][app-pass-info] - consult the link for more information). You can add this password to the `.env` variable **with or without the spaces**, it doesn't matter.
+In order to obtain the `APP_PASSWORD` value, log in with your username on production, go to _Edit User_ page and create an _application password_ (this is a [new system for making authenticated requests to various WordPress APIs][app-pass-info] - consult the link for more information). You can add this password to the `.env` variable **without the spaces** if possible.
 
 Once you have set your environment variables you're ready to go!
 

@@ -1,4 +1,4 @@
-FROM wordpress:php7.4-apache
+FROM wordpress:php8.1-apache
 
 #RUN docker-php-ext-install mysqli pdo pdo_mysql
 
