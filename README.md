@@ -99,6 +99,14 @@ Subsequently it will run an instance of `wp-cli` inside a docker container, and 
 
 [^1]: There are plenty of options for managing themes or plugins for an existing project, either you can copy files manually to respective directories (maybe pulling everything down from ftp etc...), or you can follow more advanced setups, here, in my [suggested workflow section](#suggested-workflow) I propose a system where you can connect your theme and then sync the plugins to match the exact versions you have in production.
 
+##### Refresh Wordpress Docker image:
+To refresh the wordpress image (for example to update the wordpress version) you can simply run the following command:
+
+```bash
+./helpers/refresh-wordpress.sh
+```
+By running this script you will download the latest wordpress image and rebuild the wordpress container. This will not affect your database or your themes/plugins/uploads folders.
+
 ---
 
 ## Dealing with permissions
