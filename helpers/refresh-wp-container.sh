@@ -2,9 +2,13 @@
 
 set -e  # Exit on error
 
-# Get parent directory name for volume
-PARENT_DIR=$(basename "$(pwd)")
-VOLUME_NAME="${PARENT_DIR}_wordpress"
+# relative project path (since this script is located in /helpers subdir)
+# also replace any spaces with underscores (only it it has spaces)
+PARENT_DIR="$(basename "$(dirname "$(dirname "$(realpath "$0")")")")"
+SANITIZED_DIR="${PARENT_DIR// /_}"
+
+VOLUME_NAME="${SANITIZED_DIR}_wordpress"
+
 
 echo "🔄  Stopping containers..."
 docker compose down 
