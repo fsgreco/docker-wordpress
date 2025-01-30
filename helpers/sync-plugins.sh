@@ -9,27 +9,30 @@
 # For more context and information please consult the documentation of the entire project:
 # docker-wordpress - https://github.com/fsgreco/docker-wordpress#sync-plugins
 
+PARENT_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
+INSTALL_SCRIPT="$PARENT_DIR/helpers/install-plugins.sh"
 
-INSTALL_SCRIPT="./helpers/install-plugins.sh"
-if [ ! -f $INSTALL_SCRIPT ]; then
+if [ ! -f "$INSTALL_SCRIPT" ]; then
 
-	source ./helpers/generate-plugin-script.sh
-	generate_plugin_list
-	if [ "$1" = "test" ];then echo "Created $INSTALL_SCRIPT" && exit 0; fi
+  source "$PARENT_DIR/helpers/generate-plugin-script.sh"
+  generate_plugin_list
+  echo "✅  Created install-plugins.sh inside $PARENT_DIR/helpers"
 
 else 
-	echo "Skipping fetching plugins from production - $INSTALL_SCRIPT already exist."
+  echo "🔄  Skipping fetching plugins from production - install-plugins.sh already exist."
 fi
+
+if [ "$1" = "test" ]; then exit 0; fi
 
 echo "Running docker instance to install plugins inside the container..."
 
 docker run -it --rm \
     --volumes-from ${1:-'wp-site'} \
     --network container:${1:-'wp-site'} \
-		-e WORDPRESS_DB_HOST=db:3306 \
+    -e WORDPRESS_DB_HOST=db:3306 \
     -e WORDPRESS_DB_USER=wp_user \
     -e WORDPRESS_DB_PASSWORD=wp_pass \
     -e WORDPRESS_DB_NAME=wp_wordpress \
-    --mount type=bind,source="$(pwd)"/helpers/install-plugins.sh,target=/var/www/html/install-plugins.sh \
+    --mount type=bind,source="$INSTALL_SCRIPT",target=/var/www/html/install-plugins.sh \
     --user "$(id -u)":"$(id -g)" \
     wordpress:cli /var/www/html/install-plugins.sh
